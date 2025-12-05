@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema POS - Punto de Venta</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="navbar-brand">
+          <i class="fas fa-cash-register"></i>
+          <h1>Sistema POS</h1>
+        </div>
+
+        <button class="menu-toggle" id="mobile-menu">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <ul class="navbar-menu">
+          <li>
+            <a href="index.html" class="active"
+              ><i class="fas fa-home"></i> Inicio</a
+            >
+          </li>
+          <li>
+            <a href="productos.html"><i class="fas fa-box"></i> Productos</a>
+          </li>
+          <li>
+            <a href="clientes.html"><i class="fas fa-users"></i> Clientes</a>
+          </li>
+          <li>
+            <a href="ventas.html"
+              ><i class="fas fa-shopping-cart"></i> Ventas</a
+            >
+          </li>
+          <li>
+            <a href="reportes.html"
+              ><i class="fas fa-chart-line"></i> Reportes</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="main-container">
+      <section id="dashboard" class="section active">
+        <div class="section-header">
+          <h2>Panel de Control</h2>
+          <p>Bienvenido al Sistema de Punto de Venta</p>
+        </div>
+
+        <div class="dashboard-cards">
+          <div class="card card-primary">
+            <div class="card-icon"><i class="fas fa-box"></i></div>
+            <div class="card-content">
+              <h3 id="totalProductos">0</h3>
+              <p>Productos</p>
+            </div>
+          </div>
+
+          <div class="card card-success">
+            <div class="card-icon"><i class="fas fa-users"></i></div>
+            <div class="card-content">
+              <h3 id="totalClientes">0</h3>
+              <p>Clientes</p>
+            </div>
+          </div>
+
+          <div class="card card-warning">
+            <div class="card-icon"><i class="fas fa-receipt"></i></div>
+            <div class="card-content">
+              <h3 id="totalVentas">0</h3>
+              <p>Ventas Hoy</p>
+            </div>
+          </div>
+
+          <div class="card card-info">
+            <div class="card-icon"><i class="fas fa-dollar-sign"></i></div>
+            <div class="card-content">
+              <h3 id="ventasTotal">$0.00</h3>
+              <p>Total Hoy</p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+          "
+        >
+          <div
+            style="
+              background: white;
+              border-radius: 0.75rem;
+              overflow: hidden;
+              box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            "
+          >
+            <div
+              style="
+                background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+                padding: 1rem;
+                text-align: center;
+                color: white;
+              "
+            >
+              <h3
+                style="
+                  margin: 0;
+                  font-size: 1.1rem;
+                  font-weight: 600;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 8px;
+                "
+              >
+                <i class="fas fa-exchange-alt"></i> Tipo de Cambio USD/MXN
+              </h3>
+            </div>
+            <div style="padding: 1.25rem" id="tipoCambioWidget">
+              <div style="text-align: center; padding: 1.5rem">
+                <i
+                  class="fas fa-spinner fa-spin"
+                  style="font-size: 1.5rem; color: #2563eb"
+                ></i>
+              </div>
+            </div>
+          </div>
+
+          <div
+            style="
+              background: white;
+              border-radius: 0.75rem;
+              overflow: hidden;
+              box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            "
+          >
+            <div
+              style="
+                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                padding: 1rem;
+                text-align: center;
+                color: white;
+              "
+            >
+              <h3
+                style="
+                  margin: 0;
+                  font-size: 1.1rem;
+                  font-weight: 600;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 8px;
+                "
+              >
+                <i class="fas fa-map-marker-alt"></i> Nuestra Tienda - Mérida
+              </h3>
+            </div>
+            <div style="padding: 1.25rem" id="mapaWidget">
+              <div style="text-align: center; padding: 1.5rem">
+                <i
+                  class="fas fa-spinner fa-spin"
+                  style="font-size: 1.5rem; color: #10b981"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <h3>Acciones Rápidas</h3>
+          <div class="action-buttons">
+            <a href="ventas.html" class="btn btn-primary">
+              <i class="fas fa-shopping-cart"></i> Nueva Venta
+            </a>
+            <a href="productos.html" class="btn btn-success">
+              <i class="fas fa-plus"></i> Agregar Producto
+            </a>
+            <a href="clientes.html" class="btn btn-info">
+              <i class="fas fa-user-plus"></i> Agregar Cliente
+            </a>
+            <a href="reportes.html" class="btn btn-warning">
+              <i class="fas fa-chart-bar"></i> Ver Reportes
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="api-client.js"></script>
+    <script src="api-externas.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
