@@ -47,7 +47,8 @@ public class DocumentoServlet extends HttpServlet {
             return;
         }
 
-        if (request.getServletPath().contains("download")) {
+        String requestURI = request.getRequestURI();
+        if (requestURI.contains("/download")) {
             descargarDocumento(request, response);
         } else {
             listarDocumentos(request, response);
@@ -246,7 +247,7 @@ public class DocumentoServlet extends HttpServlet {
                 
                 response.setContentType(tipoArchivo != null ? tipoArchivo : "application/octet-stream");
                 response.setHeader("Content-Disposition", "attachment; filename=\"" + nombreArchivo + "\"");
-                response.setContentLengthLong(file.length());
+                response.setContentLength((int) file.length());
                 
                 try (FileInputStream inStream = new FileInputStream(file);
                      OutputStream outStream = response.getOutputStream()) {
