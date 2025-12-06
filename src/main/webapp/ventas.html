@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ventas - Sistema POS</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Navegación Principal -->
+<nav class="navbar">
+      <div class="navbar-container">
+        <div class="navbar-brand">
+          <i class="fas fa-cash-register"></i>
+          <h1>Sistema POS</h1>
+        </div>
+        
+        <button class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <ul class="navbar-menu">
+          <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+          <li><a href="productos.html"><i class="fas fa-box"></i> Productos</a></li>
+          <li><a href="clientes.html"><i class="fas fa-users"></i> Clientes</a></li>
+          <li><a href="ventas.html" class="active"><i class="fas fa-shopping-cart"></i> Ventas</a></li>
+          <li><a href="reportes.html"><i class="fas fa-chart-line"></i> Reportes</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Contenedor Principal -->
+    <div class="main-container">
+      <!-- Sección Ventas -->
+      <section id="ventas" class="section active">
+        <div class="section-header">
+          <h2>Nueva Venta</h2>
+          <button class="btn btn-success" id="btnFinalizarVenta" type="button">
+            <i class="fas fa-check"></i> Finalizar Venta
+          </button>
+        </div>
+
+        <div class="venta-container">
+          <div class="venta-form">
+            <div class="form-group">
+              <label for="selectCliente">Cliente:</label>
+              <select id="selectCliente" class="form-control">
+                <option value="">Seleccione un cliente...</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="selectProducto">Producto:</label>
+              <select id="selectProducto" class="form-control">
+                <option value="">Seleccione un producto...</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cantidadProducto">Cantidad:</label>
+                <input
+                  type="number"
+                  id="cantidadProducto"
+                  class="form-control"
+                  value="1"
+                  min="1"
+                />
+              </div>
+              <div class="form-group">
+                <label for="precioVenta">Precio:</label>
+                <input
+                  type="number"
+                  id="precioVenta"
+                  class="form-control"
+                  step="0.01"
+                  readonly
+                />
+              </div>
+            </div>
+
+            <button class="btn btn-primary btn-block" id="btnAgregarProducto">
+              <i class="fas fa-plus"></i> Agregar al Carrito
+            </button>
+          </div>
+
+          <div class="carrito-container">
+            <h3>Carrito de Compra</h3>
+            <div class="table-container">
+              <table id="tablaCarrito">
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="carritoBody">
+                  <!-- Los items se cargarán dinámicamente -->
+                </tbody>
+              </table>
+            </div>
+            <div class="total-venta">
+              <h3>Total: $<span id="totalVenta">0.00</span></h3>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Notificación Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script src="api-client.js"></script>
+    <script src="validaciones.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
