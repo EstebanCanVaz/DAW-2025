@@ -127,19 +127,41 @@ async function cargarDocumentosCliente(idcliente) {
         if (data.success && data.data && data.data.length > 0) {
             data.data.forEach(doc => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${doc.nombre_archivo}</td>
-                    <td>${doc.tipo_archivo || 'N/A'}</td>
-                    <td>${new Date(doc.fecha_subida).toLocaleString('es-MX')}</td>
-                    <td class="table-actions">
-                        <button class="btn btn-sm btn-info" onclick="descargarDocumento(${doc.iddocumento}, '${doc.nombre_archivo}')">
-                            <i class="fas fa-download"></i> Descargar
-                        </button>
-                        <button class="btn btn-sm btn-danger" onclick="eliminarDocumento(${doc.iddocumento}, ${idcliente})">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                `;
+                
+                // Crear celdas de información
+                const tdNombre = document.createElement('td');
+                tdNombre.textContent = doc.nombre_archivo;
+                
+                const tdTipo = document.createElement('td');
+                tdTipo.textContent = doc.tipo_archivo || 'N/A';
+                
+                const tdFecha = document.createElement('td');
+                tdFecha.textContent = new Date(doc.fecha_subida).toLocaleString('es-MX');
+                
+                // Crear celda de acciones
+                const tdAcciones = document.createElement('td');
+                tdAcciones.className = 'table-actions';
+                
+                // Botón descargar
+                const btnDescargar = document.createElement('button');
+                btnDescargar.className = 'btn btn-sm btn-info';
+                btnDescargar.innerHTML = '<i class="fas fa-download"></i> Descargar';
+                btnDescargar.onclick = () => descargarDocumento(doc.iddocumento, doc.nombre_archivo);
+                
+                // Botón eliminar
+                const btnEliminar = document.createElement('button');
+                btnEliminar.className = 'btn btn-sm btn-danger';
+                btnEliminar.innerHTML = '<i class="fas fa-trash"></i>';
+                btnEliminar.onclick = () => eliminarDocumento(doc.iddocumento, idcliente);
+                
+                tdAcciones.appendChild(btnDescargar);
+                tdAcciones.appendChild(btnEliminar);
+                
+                tr.appendChild(tdNombre);
+                tr.appendChild(tdTipo);
+                tr.appendChild(tdFecha);
+                tr.appendChild(tdAcciones);
+                
                 tbody.appendChild(tr);
             });
         } else {
