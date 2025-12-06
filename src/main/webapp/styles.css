@@ -216,6 +216,47 @@ tbody td { padding: 1rem; }
 .form-control:focus { outline: none; border-color: var(--primary-color); }
 .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
 
+/* Cliente Venta Box - Sección destacada */
+.cliente-venta-box {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    padding: 1.5rem 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    margin-bottom: 2rem;
+}
+
+.cliente-venta-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+}
+
+.cliente-venta-header i {
+    font-size: 1.5rem;
+}
+
+.cliente-venta-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.cliente-venta-box .form-control {
+    background: var(--white);
+    border: 2px solid transparent;
+    font-size: 1.05rem;
+    padding: 0.85rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.cliente-venta-box .form-control:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+}
+
 /* Venta Container */
 .venta-container { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; }
 .venta-form, .carrito-container { background: var(--white); padding: 2rem; border-radius: 1rem; box-shadow: var(--shadow); }
@@ -282,6 +323,18 @@ tbody td { padding: 1rem; }
     .main-container { padding: 0 1rem; }
     .section-header { flex-direction: column; align-items: flex-start; }
     .form-row { grid-template-columns: 1fr; }
+    
+    /* Cliente Venta Box Responsive */
+    .cliente-venta-box {
+        padding: 1rem 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .cliente-venta-header h3 {
+        font-size: 1.1rem;
+    }
+    .cliente-venta-header i {
+        font-size: 1.3rem;
+    }
 }
 
 @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
@@ -553,6 +606,19 @@ tbody td { padding: 1rem; }
         width: 100% !important;
         margin-bottom: 5mm;
         page-break-inside: avoid;
+    }
+
+    /* Cliente Venta Box para impresión */
+    .cliente-venta-box {
+        background: #f3f4f6 !important;
+        border: 1pt solid #d1d5db;
+        padding: 3mm;
+        margin-bottom: 5mm;
+        page-break-inside: avoid;
+    }
+
+    .cliente-venta-header {
+        color: #000 !important;
     }
 
     /* Evitar huérfanos y viudas */

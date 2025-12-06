@@ -518,18 +518,48 @@ class VentaManager {
         // Guardar productos en cache para acceso rápido
         this.productosCache = response.data;
 
-        response.data
-          .filter((p) => p.stock > 0)
-          .forEach((producto) => {
-            const option = document.createElement("option");
-            option.value = producto.idproducto;
-            option.textContent = `${producto.nombre} - $${producto.precioProducto} (Stock: ${producto.stock})`;
-            select.appendChild(option);
-          });
+        this.updateProductosSelect();
       }
     } catch (error) {
       select.innerHTML = '<option value="">Error al cargar productos</option>';
     }
+  }
+
+  updateProductosSelect() {
+    const select = document.getElementById("selectProducto");
+    if (!select || !this.productosCache) return;
+
+    // Guardar el producto seleccionado actualmente
+    const selectedValue = select.value;
+
+    // Limpiar opciones excepto la primera
+    select.innerHTML = '<option value="">Seleccione un producto...</option>';
+
+    // Calcular stock disponible considerando el carrito
+    this.productosCache
+      .filter((p) => {
+        const cantidadEnCarrito = this.getCantidadEnCarrito(p.idproducto);
+        return (p.stock - cantidadEnCarrito) > 0;
+      })
+      .forEach((producto) => {
+        const cantidadEnCarrito = this.getCantidadEnCarrito(producto.idproducto);
+        const stockDisponible = producto.stock - cantidadEnCarrito;
+        
+        const option = document.createElement("option");
+        option.value = producto.idproducto;
+        option.textContent = `${producto.nombre} - $${producto.precioProducto} (Stock: ${stockDisponible})`;
+        select.appendChild(option);
+      });
+
+    // Restaurar selección si el producto aún está disponible
+    if (selectedValue) {
+      select.value = selectedValue;
+    }
+  }
+
+  getCantidadEnCarrito(idproducto) {
+    const item = this.carrito.find((i) => i.idproducto === parseInt(idproducto));
+    return item ? item.cantidad : 0;
   }
 
   onProductoChange(idproducto) {
@@ -538,8 +568,11 @@ class VentaManager {
         (p) => p.idproducto === parseInt(idproducto)
       );
       if (producto) {
+        const cantidadEnCarrito = this.getCantidadEnCarrito(producto.idproducto);
+        const stockDisponible = producto.stock - cantidadEnCarrito;
+        
         document.getElementById("precioVenta").value = producto.precioProducto;
-        document.getElementById("cantidadProducto").max = producto.stock;
+        document.getElementById("cantidadProducto").max = stockDisponible;
       }
     } else {
       document.getElementById("precioVenta").value = "";
@@ -601,6 +634,7 @@ class VentaManager {
     }
 
     this.updateCarrito();
+    this.updateProductosSelect(); // Actualizar stock disponible
     showToast("Producto agregado al carrito", "success");
 
     // Resetear formulario
@@ -612,6 +646,7 @@ class VentaManager {
   removeFromCarrito(index) {
     this.carrito.splice(index, 1);
     this.updateCarrito();
+    this.updateProductosSelect(); // Actualizar stock disponible
     showToast("Producto eliminado del carrito", "info");
   }
 
