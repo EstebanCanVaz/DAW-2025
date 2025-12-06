@@ -21,6 +21,13 @@ Sistema de punto de venta desarrollado con Java Servlets, MySQL y JavaScript van
 mysql -u root -p < "SQL File 1.sql"
 ```
 
+#### Opción alternativa: Usando phpMyAdmin 
+1. Inicia XAMPP y asegúrate de que MySQL esté corriendo
+2. Abre http://localhost/phpmyadmin en tu navegador
+3. Ve a la pestaña "Importar"
+4. Selecciona el archivo `SQL File 1.sql`
+5. Haz clic en "Continuar"
+
 ### 2. Configuración
 
 Editar `src/main/java/Configuracion/CConexion.java`:

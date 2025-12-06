@@ -285,3 +285,316 @@ tbody td { padding: 1rem; }
 }
 
 @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+   @media print {
+    /* Ocultar elementos de navegación e interacción */
+    .navbar,
+    .btn,
+    .button,
+    .modal,
+    .toast,
+    .close,
+    .menu-toggle,
+    .search-box,
+    .form-group button,
+    .table-actions,
+    .action-buttons,
+    input[type="file"],
+    #dropZone,
+    .quick-actions {
+        display: none !important;
+    }
+
+    /* Ajustes generales para impresión */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+    body {
+        background: white !important;
+        color: black !important;
+        font-size: 12pt;
+        line-height: 1.5;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Optimizar contenido principal */
+    .main-container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 10mm !important;
+    }
+
+    /* Secciones visibles */
+    .section {
+        display: block !important;
+        page-break-inside: avoid;
+    }
+
+    /* Encabezados de sección */
+    .section-header {
+        border-bottom: 2px solid #333;
+        padding-bottom: 5mm;
+        margin-bottom: 5mm;
+        page-break-after: avoid;
+    }
+
+    .section-header h2 {
+        font-size: 18pt;
+        color: #000 !important;
+    }
+
+    /* Tablas optimizadas para impresión */
+    .table-container {
+        box-shadow: none !important;
+        border: 1px solid #333;
+        overflow: visible !important;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        page-break-inside: auto;
+    }
+
+    thead {
+        display: table-header-group;
+        background: #f0f0f0 !important;
+        color: #000 !important;
+        -webkit-print-color-adjust: exact;
+    }
+
+    thead th {
+        border: 1px solid #333 !important;
+        padding: 5mm;
+        font-weight: bold;
+        background: #e0e0e0 !important;
+    }
+
+    tbody tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+        border-bottom: 1px solid #999 !important;
+    }
+
+    tbody td {
+        border: 1px solid #ccc !important;
+        padding: 3mm;
+        color: #000 !important;
+    }
+
+    /* Evitar que filas queden cortadas */
+    tr {
+        page-break-inside: avoid;
+    }
+
+    /* Cards del dashboard */
+    .dashboard-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5mm;
+        margin-bottom: 10mm;
+    }
+
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #333;
+        page-break-inside: avoid;
+        padding: 5mm;
+        background: white !important;
+    }
+
+    .card-icon {
+        background: #e0e0e0 !important;
+        color: #000 !important;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .card-content h3 {
+        color: #000 !important;
+        font-size: 16pt;
+    }
+
+    .card-content p {
+        color: #333 !important;
+    }
+
+    /* Detalles de factura para impresión */
+    #detalleFactura,
+    #resultadosReporte {
+        page-break-inside: avoid;
+    }
+
+    #detalleFactura h3 {
+        font-size: 16pt;
+        margin-bottom: 5mm;
+        border-bottom: 2px solid #000;
+        padding-bottom: 2mm;
+    }
+
+    /* Formularios - mostrar solo valores */
+    .form-control {
+        border: none !important;
+        border-bottom: 1px solid #999 !important;
+        background: transparent !important;
+        padding: 2mm 0 !important;
+    }
+
+    /* Total de venta destacado */
+    .total-venta {
+        background: #e0e0e0 !important;
+        color: #000 !important;
+        border: 2px solid #333 !important;
+        padding: 5mm;
+        page-break-inside: avoid;
+        -webkit-print-color-adjust: exact;
+    }
+
+    /* Badges en blanco y negro */
+    .badge {
+        border: 1px solid #333 !important;
+        background: white !important;
+        color: #000 !important;
+    }
+
+    .badge-danger::before {
+        content: "⚠ ";
+    }
+
+    .badge-warning::before {
+        content: "⚡ ";
+    }
+
+    .badge-success::before {
+        content: "✓ ";
+    }
+
+    /* Información de empresa (header personalizado) */
+    @page {
+        margin: 15mm 10mm;
+        size: letter;
+    }
+
+    /* Agregar información de página */
+    .section::after {
+        content: "";
+        display: block;
+        page-break-after: always;
+    }
+
+    .section:last-child::after {
+        content: none;
+    }
+
+    /* Footer automático con número de página */
+    @page {
+        @bottom-right {
+            content: "Página " counter(page) " de " counter(pages);
+            font-size: 10pt;
+            color: #666;
+        }
+        
+        @bottom-left {
+            content: "Sistema POS - Impreso el " date();
+            font-size: 10pt;
+            color: #666;
+        }
+    }
+
+    /* Carrito de ventas para impresión */
+    .carrito-container {
+        box-shadow: none !important;
+        border: 1px solid #333;
+        page-break-inside: avoid;
+    }
+
+    /* QR Codes y imágenes */
+    .qr-factura {
+        page-break-inside: avoid;
+        text-align: center;
+        padding: 5mm;
+        border: 1px solid #333;
+    }
+
+    .qr-factura img {
+        max-width: 50mm !important;
+        height: auto !important;
+    }
+
+    /* Ocultar contenido de APIs externas en impresión */
+    #tipoCambioWidget,
+    #mapaWidget {
+        display: none !important;
+    }
+
+    /* Asegurar que los links muestren la URL */
+    a[href]:after {
+        content: " (" attr(href) ")";
+        font-size: 9pt;
+        color: #666;
+    }
+
+    /* No mostrar URL para links internos */
+    a[href^="#"]:after,
+    a[href^="javascript"]:after {
+        content: "";
+    }
+
+    /* Optimizar venta-container para impresión */
+    .venta-container {
+        display: block !important;
+    }
+
+    .venta-form,
+    .carrito-container {
+        width: 100% !important;
+        margin-bottom: 5mm;
+        page-break-inside: avoid;
+    }
+
+    /* Evitar huérfanos y viudas */
+    h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
+
+    p, li {
+        orphans: 3;
+        widows: 3;
+    }
+
+    /* Texto más legible */
+    body, td, th {
+        font-family: "Times New Roman", serif;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: Arial, sans-serif;
+    }
+}
+
+/* Media query específico para impresión a color */
+@media print and (color) {
+    .card-primary .card-icon {
+        background: #2563eb !important;
+        color: white !important;
+    }
+
+    .card-success .card-icon {
+        background: #10b981 !important;
+        color: white !important;
+    }
+
+    .card-warning .card-icon {
+        background: #f59e0b !important;
+        color: white !important;
+    }
+
+    .card-info .card-icon {
+        background: #06b6d4 !important;
+        color: white !important;
+    }
+}
